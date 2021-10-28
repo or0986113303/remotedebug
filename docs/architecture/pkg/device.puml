@@ -1,0 +1,29 @@
+@startuml
+namespace device {
+    class DiskStatus << (S,Aquamarine) >> {
+        + All uint64
+        + Used uint64
+        + Free uint64
+
+    }
+    interface HostInfo  {
+        + GetHostname() (string, error)
+        + GetDiskStatus(path string) (DiskStatus, error)
+        + GetMacAddress() (<font color=blue>map</font>[string]string, error)
+
+    }
+    class Worker << (S,Aquamarine) >> {
+        - ctx context.Context
+        - cancel context.CancelFunc
+        - log *logrus.Entry
+
+        + GetDiskStatus(path string) (DiskStatus, error)
+        + GetMacAddress() (<font color=blue>map</font>[string]string, error)
+        + GetHostname() (string, error)
+
+    }
+}
+
+"device.HostInfo" <|-- "device.Worker"
+
+@enduml

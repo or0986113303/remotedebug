@@ -1,0 +1,27 @@
+@startuml
+namespace apiman {
+    interface APIRouter  {
+        + StartServer() 
+        + StopServer() 
+        + RegisterFunc() 
+        + RegisterRouter() 
+
+    }
+    class Worker << (S,Aquamarine) >> {
+        - ctx context.Context
+        - cancel context.CancelFunc
+        - server *http.Server
+        - log *logrus.Entry
+        - routerEngine *gin.Engine
+
+        + StartServer() 
+        + StopServer() 
+        + RegisterFunc() 
+        + RegisterRouter() 
+
+    }
+}
+
+"apiman.APIRouter" <|-- "apiman.Worker"
+
+@enduml

@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch file",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${file}",
+      "args": ["cpu"]
+    },
+    {
+      "preLaunchTask": "Docker-compose-up-debug",
+      "name": "Attach remote debug mode",
+      "type": "go",
+      "request": "attach",
+      "mode": "remote",
+      "remotePath": "/appdebug",
+      "port": 2345,
+      "host": "127.0.0.1",
+      "program": "${workspaceRoot}",
+      "internalConsoleOptions": "neverOpen",
+      "postDebugTask": "Docker-compose-down-debug"
+    }
+  ]
+}

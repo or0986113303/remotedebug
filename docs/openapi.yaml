@@ -1,0 +1,41 @@
+openapi: 3.0.1
+info:
+  title: API for remotedebug dameon
+  description: Service API.
+  version: 0.1.1
+servers:
+- url: https://127.0.0.1/api/v1/
+paths:
+  /auth/api/v1/host/disk:
+    get:
+      tags:
+      - host
+      summary: get disk status
+      responses:
+        200:
+          description: capacity of disk
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device.DiskStatus'
+components:
+  schemas:
+    device.DiskStatus:
+      type: object
+      properties:
+        all:
+          type: integer
+        free:
+          type: integer
+        used:
+          type: integer
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
+security:
+- bearerAuth: []
+tags:
+- name: host

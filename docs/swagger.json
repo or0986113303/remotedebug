@@ -1,0 +1,51 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/auth/api/v1/host/disk": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "host"
+                ],
+                "summary": "get disk status",
+                "responses": {
+                    "200": {
+                        "description": "capacity of disk",
+                        "schema": {
+                            "$ref": "#/definitions/device.DiskStatus"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "device.DiskStatus": {
+            "type": "object",
+            "properties": {
+                "all": {
+                    "type": "integer"
+                },
+                "free": {
+                    "type": "integer"
+                },
+                "used": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

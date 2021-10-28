@@ -1,0 +1,17 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Docker-compose-up-debug",
+            "type": "shell",
+            "command": "cp app/docker-compose-debug.yml ./ && cp app/Dockerfile.debug ./ && docker-compose -f ./docker-compose-debug.yml up -d && sh ./startdebug.sh"
+        },
+        {
+            "label": "Docker-compose-down-debug",
+            "type": "shell",
+            "command": "docker-compose -f docker-compose-debug.yml down -v && docker rmi remotedebug:latest && rm -f docker-compose-debug.yml && rm -f Dockerfile.debug && docker rmi $(docker images --filter \"dangling=true\" -q --no-trunc)"
+        }
+    ]
+}

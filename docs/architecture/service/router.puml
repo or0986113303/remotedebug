@@ -1,0 +1,18 @@
+@startuml
+namespace router {
+    interface APITable  {
+        + RegisterRouter(Router *gin.RouterGroup) gin.IRoutes
+
+    }
+    class APIV1 << (S,Aquamarine) >> {
+        - ctx context.Context
+        - cancel context.CancelFunc
+
+        + RegisterRouter(Router *gin.RouterGroup) gin.IRoutes
+
+    }
+}
+
+"router.APITable" <|-- "router.APIV1"
+
+@enduml
