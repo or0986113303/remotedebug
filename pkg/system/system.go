@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"strconv"
 	"strings"
-	"syscall"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -39,9 +38,11 @@ func New() (worker *Worker) {
 
 func (w *Worker) Sysinfo() (Uptime int64, err error) {
 	go func() {
-		var sysinfo syscall.Sysinfo_t
-		syscall.Sysinfo(&sysinfo)
-		Uptime = int64(sysinfo.Uptime)
+		/*
+			var sysinfo syscall.Sysinfo_t
+			syscall.Sysinfo(&sysinfo)
+			Uptime = int64(sysinfo.Uptime)
+		*/
 		time.Sleep(3 * time.Second)
 		defer w.cancel()
 	}()

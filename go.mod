@@ -20,7 +20,7 @@ require (
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.9.0
 	github.com/steinfletcher/apitest v1.5.11
-	github.com/steinfletcher/apitest-jsonpath v1.7.1 // indirect
+	github.com/steinfletcher/apitest-jsonpath v1.7.1
 	github.com/swaggo/swag v1.7.3
 	github.com/tklauser/go-sysconf v0.3.9 // indirect
 	github.com/ugorji/go v1.2.6 // indirect
