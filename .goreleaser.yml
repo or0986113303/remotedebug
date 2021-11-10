@@ -9,10 +9,61 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
+    main: ./
     goos:
       - linux
       - windows
       - darwin
+      - freebsd
+    goarch:
+      - amd64
+      - arm64
+    gobinary: "go"
+    goarm:
+      - 6
+      - 7
+    targets:
+      - linux_amd64
+      - darwin_arm64
+      - linux_arm_7
+      - linux_arm64_7
+dockers: 
+  - image_templates: ["docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-amd64"]
+    dockerfile: ./app/Dockerfile.debug
+    use: buildx
+    build_flag_templates:
+      - --platform=linux/amd64
+      - --label=org.opencontainers.image.title={{ .ProjectName }}
+      - --label=org.opencontainers.image.description={{ .ProjectName }}
+      - --label=org.opencontainers.image.url=https://github.com/or0986113303/{{ .ProjectName }}
+      - --label=org.opencontainers.image.source=https://github.com/or0986113303/{{ .ProjectName }}
+      - --label=org.opencontainers.image.version={{ .Version }}
+      - --label=org.opencontainers.image.created={{ time "2021-11-10T00:00:00Z00:00" }}
+      - --label=org.opencontainers.image.revision={{ .FullCommit }}
+      - --label=org.opencontainers.image.licenses=MIT
+  - image_templates: ["docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-arm64v8"]
+    goarch: arm64
+    dockerfile: ./app/Dockerfile.debug
+    use: buildx
+    build_flag_templates:
+      - --platform=linux/arm64/v8
+      - --label=org.opencontainers.image.title={{ .ProjectName }}
+      - --label=org.opencontainers.image.description={{ .ProjectName }}
+      - --label=org.opencontainers.image.url=https://github.com/or0986113303/{{ .ProjectName }}
+      - --label=org.opencontainers.image.source=https://github.com/or0986113303/{{ .ProjectName }}
+      - --label=org.opencontainers.image.version={{ .Version }}
+      - --label=org.opencontainers.image.created={{ time "2021-11-10T00:00:00Z00:00" }}
+      - --label=org.opencontainers.image.revision={{ .FullCommit }}
+      - --label=org.opencontainers.image.licenses=MIT
+docker_manifests:
+  - name_template: docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}
+    image_templates:
+      - docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-amd64
+      - docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-arm64v8
+  - name_template: mirchen/{{ .ProjectName }}:latest
+    image_templates:
+      - docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-amd64
+      - docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-arm64v8
 archives:
   - replacements:
       darwin: Darwin
@@ -20,6 +71,26 @@ archives:
       windows: Windows
       386: i386
       amd64: x86_64
+    files:
+      - LICENSE
+      - README.md
+      - CHANGELOG.md
+      - docs/*
+      # a more complete example, check the globbing deep dive below
+      - src: '*.md'
+        dst: docs
+        # Strip parent folders when adding files to the archive.
+        # Default: false
+        strip_parent: true
+        # File info.
+        # Not all fields are supported by all formats available formats.
+        # Defaults to the file info of the actual file if not provided.
+        info:
+          owner: root
+          group: root
+          mode: 0644
+          # format is `time.RFC3339Nano`
+          mtime: 2021-11-10T00:00:00Z
 checksum:
   name_template: 'checksums.txt'
 snapshot:
