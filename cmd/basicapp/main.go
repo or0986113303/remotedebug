@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/or0986113303/remotedebug/cmd"
+	cmd "github.com/or0986113303/remotedebug/cmd/basicapp/cmd"
 )
 
 // main...
