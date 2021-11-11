@@ -29,7 +29,7 @@ builds:
       - linux_arm64_7
 dockers: 
   - image_templates: ["docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-amd64"]
-    dockerfile: ./deployments/Dockerfile
+    dockerfile: ./build/builder/Dockerfile
     use: buildx
     build_flag_templates:
       - --platform=linux/amd64
@@ -43,7 +43,7 @@ dockers:
       - --label=org.opencontainers.image.licenses=MIT
   - image_templates: ["docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-arm64v8"]
     goarch: arm64
-    dockerfile: ./deployments/Dockerfile
+    dockerfile: ./build/builder/Dockerfile
     use: buildx
     build_flag_templates:
       - --platform=linux/arm64/v8
