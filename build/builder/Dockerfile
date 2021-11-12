@@ -1,11 +1,12 @@
-FROM golang:1.16.7-stretch AS build-env
-ADD ./ /go/src/app
+FROM golang:1.16.7-stretch AS build-env 
+ENV GO111MODULE=on
+ADD . /go/src/app/
 WORKDIR /go/src/app
-RUN go get -d -v github.com/or0986113303/remotedebug/cmd/basicapp
-RUN go install -v github.com/or0986113303/remotedebug/cmd/basicapp
-RUN GOOS=linux GOARCH=amd64 go build -v -o /go/src/app/app-server ./cmd/basicapp
+RUN go get -d -v cmd/basicapp
+RUN go install -v cmd/basicapp
+RUN GOOS=linux GOARCH=amd64 go build -v -o /go/src/app/app-server cmd/basicapp
 
-FROM amd64/debian:9-slim
+FROM debian:9-slim
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Taipei
 
