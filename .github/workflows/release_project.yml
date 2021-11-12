@@ -37,6 +37,6 @@ jobs:
         with:
           version: latest
           args: release --rm-dist
-          workdir: ./cmd/basicapp
+          workdir: .
         env:
           GITHUB_TOKEN: ${{ secrets.SUPER_GITHUB_TOKEN }}
