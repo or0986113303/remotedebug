@@ -1,4 +1,4 @@
-FROM debian:9-slim
+FROM debian
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Taipei
 
@@ -13,4 +13,4 @@ ADD . /go/src/app/
 WORKDIR /go/src/app
 
 EXPOSE 5000
-ENTRYPOINT ["app-server", "daemon"]
+ENTRYPOINT ["remotedebug", "daemon"]

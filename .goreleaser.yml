@@ -10,7 +10,6 @@ builds:
   - env:
       - CGO_ENABLED=0
     main: ./cmd/basicapp
-    binary: app-server
     goos:
       - linux
       - windows
