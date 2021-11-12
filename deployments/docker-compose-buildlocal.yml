@@ -4,6 +4,9 @@ version: "3.5"
 
 services:
   server:
+    build:
+      context: ../
+      dockerfile: build/builder/Dockerfile
     image: mirchen/remotedebug:latest
     working_dir: /go/src/app
     ports:

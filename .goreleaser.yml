@@ -24,8 +24,6 @@ builds:
       - 7
     targets:
       - linux_amd64
-      - darwin_arm64
-      - linux_arm_7
       - linux_arm64_7
 dockers: 
   - image_templates: ["docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-amd64"]
@@ -41,12 +39,11 @@ dockers:
       - --label=org.opencontainers.image.created={{ time "2021-11-10T00:00:00Z00:00" }}
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses=MIT
-  - image_templates: ["docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-arm64v8"]
-    goarch: arm64
+  - image_templates: ["docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-arm64"]
     dockerfile: ./build/releaser/Dockerfile
     use: buildx
     build_flag_templates:
-      - --platform=linux/arm64/v8
+      - --platform=linux/arm64
       - --label=org.opencontainers.image.title={{ .ProjectName }}
       - --label=org.opencontainers.image.description={{ .ProjectName }}
       - --label=org.opencontainers.image.url=https://github.com/or0986113303/{{ .ProjectName }}
@@ -59,11 +56,9 @@ docker_manifests:
   - name_template: docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}
     image_templates:
       - docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-amd64
-      - docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-arm64v8
   - name_template: mirchen/{{ .ProjectName }}:latest
     image_templates:
       - docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-amd64
-      - docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-arm64v8
 archives:
   - replacements:
       darwin: Darwin
