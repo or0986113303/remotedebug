@@ -6,7 +6,7 @@ services:
   server:
     build:
       context: ../
-      dockerfile: build/debuger/Dockerfile.debug
+      dockerfile: build/debuger/Dockerfile
     image: mirchen/remotedebug-debug:latest
     working_dir: /appdebug
     volumes:

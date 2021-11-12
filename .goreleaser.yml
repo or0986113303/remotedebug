@@ -10,6 +10,7 @@ builds:
   - env:
       - CGO_ENABLED=0
     main: ./cmd/basicapp
+    binary: app-server
     goos:
       - linux
       - windows
@@ -29,7 +30,7 @@ builds:
       - linux_arm64_7
 dockers: 
   - image_templates: ["docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-amd64"]
-    dockerfile: ./build/builder/Dockerfile
+    dockerfile: ./build/releaser/Dockerfile
     use: buildx
     build_flag_templates:
       - --platform=linux/amd64
@@ -43,7 +44,7 @@ dockers:
       - --label=org.opencontainers.image.licenses=MIT
   - image_templates: ["docker.io/mirchen/{{ .ProjectName }}:{{ .Version }}-arm64v8"]
     goarch: arm64
-    dockerfile: ./build/builder/Dockerfile
+    dockerfile: ./build/releaser/Dockerfile
     use: buildx
     build_flag_templates:
       - --platform=linux/arm64/v8
