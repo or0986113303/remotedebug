@@ -13,4 +13,4 @@ ADD . /go/src/app/
 WORKDIR /go/src/app
 
 EXPOSE 5000
-ENTRYPOINT ["remotedebug", "daemon"]
+ENTRYPOINT ["bash"]
