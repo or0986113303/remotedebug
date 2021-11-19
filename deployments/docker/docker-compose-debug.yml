@@ -5,12 +5,12 @@ version: "3.5"
 services:
   server:
     build:
-      context: ../
+      context: ../../
       dockerfile: build/debuger/Dockerfile
     image: mirchen/remotedebug-debug:latest
     working_dir: /appdebug
     volumes:
-      - ../:/appdebug
+      - ../../:/appdebug
     ports:
       # Golang Server export 5000 Port
       - 5000:5000

@@ -28,3 +28,23 @@ git push origin $VERSION
 goreleaser release
 ```
 
+## Useage -- minikube for Loadbalancer type of helm chart
+
+Please type the below commands to toggle minukube connect to LoadBalancer services
+
+```sh
+sh ./script/installhelm.sh &> /dev/null 2>&1 &
+```
+
+And then waitting termial feedback done
+
+```sh
+sh ./script/showipforminikube.sh
+```
+
+If you want to uninstall this helm chart, type below commands on terminal localhost
+
+```sh
+sh ./script/uninstallhelm.sh
+```
+

@@ -6,12 +6,12 @@
         {
             "label": "Docker-compose-up-debug",
             "type": "shell",
-            "command": "docker-compose -f deployments/docker-compose-debug.yml up -d && sh scripts/startdebug.sh"
+            "command": "docker-compose -f deployments/docker/docker-compose-debug.yml up -d && sh scripts/startdebug.sh"
         },
         {
             "label": "Docker-compose-down-debug",
             "type": "shell",
-            "command": "docker-compose -f deployments/docker-compose-debug.yml down -v && docker rmi mirchen/remotedebug-debug:latest && docker rmi $(docker images --filter \"dangling=true\" -q --no-trunc)"
+            "command": "docker-compose -f deployments/docker/docker-compose-debug.yml down -v && docker rmi mirchen/remotedebug-debug:latest && docker rmi $(docker images --filter \"dangling=true\" -q --no-trunc)"
         }
     ]
 }
